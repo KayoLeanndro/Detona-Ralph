@@ -12,7 +12,7 @@ const state = {
         currentTime: 60,
     },
     actions:{
-        timerId: setInterval(ramdomSquare, 1000),
+        timerId: setInterval(ramdomSquare, 600),
         countDownTimerId: setInterval(countDown,1000),
     }
 };
@@ -28,6 +28,12 @@ function countDown(){
         
     }
 }
+
+function playSound() {
+    let audio = new Audio("./src/audios/hit.m4a");
+    audio.volume = 0.2;
+    audio.play();
+  }
 
 function ramdomSquare(){
     state.view.squares.forEach((square)=>{
@@ -50,7 +56,8 @@ function addListenerHitBox(){
             if(square.id === state.values.hitPosition){
                 state.values.result++;
                 state.view.score.textContent = state.values.result;
-                state.values.hitPosition = null;       
+                state.values.hitPosition = null;
+                playSound();       
             }
         })
     })
